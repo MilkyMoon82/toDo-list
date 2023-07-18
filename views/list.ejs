@@ -11,25 +11,31 @@
 <body>
     <div class="box" id="heading">
 
-        <h1> <%= tDay %> </h1>
+        <h1>
+            <%= tDay %>
+        </h1>
     </div>
     <div class="box">
 
 
-        <% for(let i=0; i < newTask.length; i++){ %>
-            <div class="item">
-                <input type="checkbox">
-                <p>
-                    <%= newTask[i] %>
-                </p>
+        <% newTask.forEach(function(item){ %>
+            <form action="/delete" method="post">
 
-            </div>
+                <div class="item">
+                    <input onChange="this.form.submit()" type="checkbox" name="checkbox" value="<%=item._id%>">
+                    <p>
+                        <%= item.name %>
+                    </p>
 
-            <% } %>
+                </div>
+                <input type="hidden" name="listName" value="<%= tDay %>">
+            </form>
 
-                <form action="/" method="post" ">
+            <% }) %>
+
+                <form action="/" method="post" class="item">
                     <input type="text" name="newValue" placeholder="new item" autocomplete="off">
-                    <button type="submit" name="list" > + </button>
+                    <button type="submit" name="list" value="<%= tDay %>"> + </button>
                 </form>
     </div>
 
